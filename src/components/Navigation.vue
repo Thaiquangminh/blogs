@@ -12,9 +12,8 @@
           <router-link class="link" to="#">Login/Register</router-link>
         </ul>
       </div>
-      <div v-if="mobile" @click="toggleNav">icon</div>
     </nav>
-    <menu/>
+    <menu-icon class="menu-icon" v-if="mobile" @click="toggleNav"/>
     <transition name="mobile-nav">
       <ul class="mobile-nav" v-if="mobileNav">
         <router-link class="link" to="#">Home</router-link>
@@ -27,11 +26,17 @@
 </template>
 
 <script>
+import menuIcon from "../assets/Icons/menu.svg";
+
 
 export default {
+
   created() {
     window.addEventListener('resize', this.checkScreen);
     this.checkScreen();
+  },
+  components: {
+    menuIcon,
   },
   data() {
     return {
@@ -53,8 +58,7 @@ export default {
     },
     toggleNav() {
       this.mobileNav = !this.mobileNav;
-    }
-
+    },
   },
 };
 </script>
@@ -120,6 +124,14 @@ header
   .link
     padding: 15px 0
     color: #fff
+
+.menu-icon
+  cursor: pointer
+  position: absolute
+  top: 32px
+  right: 25px
+  height: 25px
+  width: auto
 
 .mobile-nav-enter-active,
 .mobile-nav-leave-active
