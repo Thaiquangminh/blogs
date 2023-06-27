@@ -6,7 +6,7 @@
       <div class="container">
         <h3>View More Recent Blogs</h3>
         <div class="blog-cards">
-          <BlogCard :post="post" v-for="(post, index) in sampleBlogCards" :key="index"/>
+          <BlogCard :post="post" v-for="(post, index) in getBlogCards" :key="index"/>
         </div>
       </div>
     </div>
@@ -25,6 +25,7 @@
 import BlogPost from "@/components/BlogPost.vue";
 import BlogCard from "@/components/BlogCard.vue";
 import Arrow from "../assets/Icons/arrow-right-light.svg";
+import {mapGetters} from "vuex";
 
 export default {
   name: "Home",
@@ -49,15 +50,12 @@ export default {
           blogCoverPhoto: 'designed-for-everyone'
         }
       ],
-      sampleBlogCards: [
-        {blogTitle: "Blog Card", blogCoverPhoto: "stock-1", blogDate: 'May 15, 2015'},
-        {blogTitle: "Blog Card", blogCoverPhoto: "stock-2", blogDate: 'May 15, 2015'},
-        {blogTitle: "Blog Card", blogCoverPhoto: "stock-3", blogDate: 'May 15, 2015'},
-        {blogTitle: "Blog Card", blogCoverPhoto: "stock-4", blogDate: 'May 15, 2015'}
-      ]
     }
-
+  },
+  computed: {
+    ...mapGetters('card', ['getBlogCards'])
   }
+
 };
 </script>
 
