@@ -2,12 +2,12 @@
   <header>
     <nav class="container">
       <div class="branding">
-        <router-link class="header" to="/home">Fire Blogs</router-link>
+        <router-link class="header" to="/">Fire Blogs</router-link>
       </div>
       <div class="nav-links">
         <ul v-if="!mobile">
-          <router-link class="link" to="#">Home</router-link>
-          <router-link class="link" to="#">Blogs</router-link>
+          <router-link class="link" to="/">Home</router-link>
+          <router-link class="link" to="/blogs">Blogs</router-link>
           <router-link class="link" to="#">Create Post</router-link>
           <router-link class="link" to="#">Login/Register</router-link>
         </ul>
@@ -16,8 +16,8 @@
     <menu-icon class="menu-icon" v-if="mobile" @click="toggleNav"/>
     <transition name="mobile-nav">
       <ul class="mobile-nav" v-if="mobileNav">
-        <router-link class="link" to="#">Home</router-link>
-        <router-link class="link" to="#">Blogs</router-link>
+        <router-link class="link" to="/">Home</router-link>
+        <router-link class="link" to="/blogs">Blogs</router-link>
         <router-link class="link" to="#">Create Post</router-link>
         <router-link class="link" to="#">Login/Register</router-link>
       </ul>

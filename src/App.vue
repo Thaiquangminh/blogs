@@ -2,7 +2,11 @@
   <div class="app-wrapper">
     <div class="app">
       <navigation/>
-      <router-view/>
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component"/>
+        </transition>
+      </router-view>
       <footer-vue/>
     </div>
   </div>
