@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper">
     <div class="app">
-      <navigation/>
+      <navigation v-if="showNavigation"/>
       <router-view v-slot="{ Component }">
         <transition name="fade">
           <component :is="Component"/>
@@ -13,32 +13,47 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation.vue";
-import FooterVue from "@/components/Footer.vue";
+import Navigation from '@/components/Navigation.vue';
+import FooterVue from '@/components/Footer.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {FooterVue, Navigation},
   data() {
-    return {};
+    return {
+      showNavigation: null,
+    };
   },
   created() {
+    this.checkRoute();
   },
   mounted() {
   },
-  methods: {},
-  watch: {},
+  methods: {
+    checkRoute() {
+      if (this.$route.path === '/login' || this.$route.path === '/register' || this.$route.path === '/forgotPassword') {
+        this.showNavigation = false;
+      } else {
+        this.showNavigation = true;
+      }
+    },
+  },
+  watch: {
+    $route() {
+      this.checkRoute();
+    }
+  },
 };
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .app {
@@ -68,13 +83,13 @@ export default {
   width: 12px;
 
   path {
-    fill: #000
+    fill: #000;
   }
 }
 
 .arrow-light {
   path {
-    fill: #fff
+    fill: #fff;
   }
 }
 
