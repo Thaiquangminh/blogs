@@ -3,9 +3,10 @@
     <div class="blog-cards container">
       <div class="toggle-edit">
         <span>Toggle Editing Post</span>
-        <input type="checkbox" v-model="editPost"/>
+        <input type="checkbox" hidden="hidden" v-model="editPost">
+        <label class="switch" :for="editPost" @click="handleToggleEdit"/>
       </div>
-      <BlogCard :post="post" v-for="(post, index) in getBlogCards" :key="index"/>
+      <BlogCard :open-edit-post="editPost" :post="post" v-for="(post, index) in getBlogCards" :key="index"/>
     </div>
   </div>
 </template>
@@ -16,10 +17,22 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "blogs",
+  data() {
+    return {
+      editPost: false
+    }
+  },
+
   components: {BlogCard},
   computed: {
     ...mapGetters('card', ['getBlogCards']),
   },
+
+  methods: {
+    handleToggleEdit() {
+      this.editPost = !this.editPost
+    }
+  }
 
 };
 </script>
@@ -64,37 +77,48 @@ export default {
     span {
       margin-right: 16px;
     }
+  }
 
-    input[type="checkbox"] {
-      position: relative;
-      border: none;
-      -webkit-appearance: none;
-      background: #fff;
-      outline: none;
-      width: 80px;
-      height: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
+  //  Switch css
+  .switch {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 25px;
+    border-radius: 20px;
+    background: #dfd9ea;
+    transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    vertical-align: middle;
+    cursor: pointer;
+  }
 
-    input[type="checkbox"]:before {
-      content: "";
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border-radius: 20px;
-      top: 0;
-      left: 0;
-      background: #303030;
-      transform: scale(1.1);
-      transition: 750ms ease all;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
+  .switch::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    background: #fafafa;
+    border-radius: 50%;
+    transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-    input:checked[type="checkbox"]:before {
-      background: #fff;
-      left: 52px;
-    }
+  .switch:active::before {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(128, 128, 128, 0.1);
+  }
+
+  input:checked + .switch {
+    background: #72da67;
+  }
+
+  input:checked + .switch::before {
+    left: 27px;
+    background: #fff;
+  }
+
+  input:checked + .switch:active::before {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28), 0 0 0 20px rgba(0, 150, 136, 0.2);
   }
 }
 </style>
