@@ -1,7 +1,7 @@
 <template>
   <div class="reset-password">
-    <!--    <Modal v-if="modalActive" :modalMessage="modalMessage" v-on:close-modal="closeModal"/>-->
-    <!--    <Loading v-if="loading"/>-->
+    <Modal v-if="modalActive" :modalMessage="modalMessage" @closeModal="closeModal"/>
+    <Loading v-if="loading"/>
     <div class="form-wrap">
       <form class="reset">
         <p class="login-register">
@@ -26,8 +26,8 @@
 
 <script>
 import email from "../assets/Icons/envelope-regular.svg";
-// import Modal from "../components/Modal";
-// import Loading from "../components/Loading";
+import Modal from "../components/Modal";
+import Loading from "../components/Loading";
 import "firebase/auth";
 
 export default {
@@ -42,12 +42,15 @@ export default {
   },
   components: {
     email,
-
+    Modal,
+    Loading
   },
   methods: {
     resetPassword() {
+      this.modalActive = true
     },
     closeModal() {
+      this.modalActive = false
     },
   },
 };

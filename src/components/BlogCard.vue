@@ -1,6 +1,6 @@
 <template>
   <div class="blog-card">
-    <div v-show="editPost" class="icons">
+    <div v-show="openEditPost" class="icons">
       <div @click="editBlog" class="icon">
         <Edit class="edit"/>
       </div>
@@ -27,7 +27,7 @@ import Delete from "../assets/Icons/trash-regular.svg"
 
 export default {
   name: "blogCard",
-  props: ["post"],
+  props: ["post", "openEditPost"],
   components: {
     Arrow,
     Edit,
