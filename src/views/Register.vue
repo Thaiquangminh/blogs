@@ -1,5 +1,6 @@
 <template>
   <div class="form-wrap">
+    <Modal v-if="activeModal" :modal-message="errorMsg" @close-modal="handleCloseModal"/>
     <form class="register">
       <p class="login-register">
         Already have an account?
@@ -40,10 +41,13 @@
 import email from "../assets/Icons/envelope-regular.svg";
 import password from "../assets/Icons/lock-alt-solid.svg";
 import user from "../assets/Icons/user-alt-light.svg";
+import {mapActions} from "vuex";
+import Modal from "@/components/Modal.vue";
 
 export default {
   name: "Register",
   components: {
+    Modal,
     email,
     password,
     user,
@@ -56,12 +60,24 @@ export default {
       email: "",
       password: "",
       error: null,
-      errorMsg: "",
+      errorMsg: "Successfully registered",
+      activeModal: false
     };
   },
   methods: {
+    ...mapActions('auth', ['signup']),
     async register() {
+      try {
+        await this.signup({email: this.email, password: this.password})
+        this.errorMsg = "Successfully registered"
+      } catch (error) {
+        this.errorMsg = error
+      }
+      this.activeModal = true
     },
+    handleCloseModal() {
+      this.activeModal = false
+    }
   },
 };
 </script>

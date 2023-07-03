@@ -12,7 +12,7 @@ export default {
   props: ["modalMessage"],
   methods: {
     closeModal() {
-      this.$emit('closeModal')
+      this.$emit('close-modal')
     },
   },
 };
