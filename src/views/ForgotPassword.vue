@@ -1,6 +1,6 @@
 <template>
   <div class="reset-password">
-    <Modal v-if="modalActive" :modalMessage="modalMessage" @closeModal="closeModal"/>
+    <Modal v-if="modalActive" :modalMessage="modalMessage" @close-modal="closeModal"/>
     <Loading v-if="loading"/>
     <div class="form-wrap">
       <form class="reset">
@@ -9,7 +9,7 @@
           <router-link class="router-link" to='/login'>Login</router-link>
         </p>
         <h2>Reset Password</h2>
-        <p>Forgot your passowrd? Enter your email to reset it</p>
+        <p>Forgot your password? Enter your email to reset it</p>
         <div class="inputs">
           <div class="input">
             <input type="text" placeholder="Email" v-model="email"/>

@@ -28,7 +28,6 @@ import Arrow from "../assets/Icons/arrow-right-light.svg";
 
 export default {
   created() {
-    console.log(this.post)
   },
   name: "blogPost",
   props: ["post"],

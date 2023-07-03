@@ -28,6 +28,7 @@
 <script>
 import email from "../assets/Icons/envelope-regular.svg";
 import password from "../assets/Icons/lock-alt-solid.svg";
+import {mapActions} from "vuex";
 
 export default {
   name: "Login",
@@ -39,12 +40,19 @@ export default {
     return {
       email: "",
       password: "",
-      error: null,
+      error: true,
       errorMsg: "",
     };
   },
   methods: {
-    signIn() {
+    ...mapActions('auth', ['login']),
+    async signIn() {
+      try {
+        await this.login({email: this.email, password: this.password})
+        await this.$router.push('/')
+      } catch (error) {
+        this.errorMsg = error
+      }
     },
   },
 };
@@ -162,6 +170,12 @@ export default {
     @media (min-width: 900px) {
       display: initial;
     }
+  }
+
+  .error {
+    text-align: center;
+    color: red;
+    font-size: 12px;
   }
 }
 </style>

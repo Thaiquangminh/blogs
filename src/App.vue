@@ -25,6 +25,7 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch('auth/keepLogin')
     this.checkRoute();
   },
   mounted() {

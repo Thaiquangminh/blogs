@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-card">
+  <div class="blog-card" @click="handleNavigateBlog">
     <div v-show="openEditPost" class="icons">
       <div @click="editBlog" class="icon">
         <Edit class="edit"/>
@@ -38,6 +38,9 @@ export default {
     },
     editBlog() {
     },
+    handleNavigateBlog() {
+      this.$router.push(`/blog/${this.post.id}`)
+    }
   },
   computed: {
     editPost() {
