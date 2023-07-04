@@ -1,14 +1,11 @@
 <template>
   <div class="profile">
-    <Modal v-if="modalActive" :modalMessage="modalMessage" v-on:close-modal="closeModal"/>
+    <Modal v-if="modalActive" :modalMessage="modalMessage" @close-modal="closeModal"/>
     <div class="container">
       <h2>Account Settings</h2>
       <div class="profile-info">
         <div class="initials">{{ $store.state.profileInitials }}</div>
-        <div class="admin-badge">
-          <adminIcon class="icon"/>
-          <span>admin</span>
-        </div>
+
         <div class="input">
           <label for="firstName">First Name:</label>
           <input type="text" id="firstName" v-model="firstName"/>
@@ -33,54 +30,50 @@
 
 <script>
 import Modal from "../components/Modal";
-import adminIcon from "../assets/Icons/user-crown-light.svg";
+import {mapActions, mapState} from "vuex";
 
 export default {
   name: "Profile",
   components: {
     Modal,
-    adminIcon,
   },
   data() {
     return {
       modalMessage: "Changes were saved!",
       modalActive: null,
+      firstName: '',
+      lastName: '',
+      email: '',
+      username: '',
     };
   },
+  created() {
+    this.getAllProfileInfo()
+  },
   methods: {
+    ...mapActions('auth', ["updateProfileInfo"]),
     updateProfile() {
+      this.updateProfileInfo({
+        firstname: this.firstName,
+        lastname: this.lastName,
+        email: this.email,
+        username: this.username,
+      })
+      this.modalActive = true
     },
     closeModal() {
+      this.modalActive = false;
     },
+    getAllProfileInfo() {
+      this.firstName = this.info.firstname
+      this.lastName = this.info.lastname
+      this.email = this.info.email
+      this.username = this.info.username
+
+    }
   },
   computed: {
-    firstName: {
-      get() {
-        return this.$store.state.profileFirstName;
-      },
-      set(payload) {
-        this.$store.commit("changeFirstName", payload);
-      },
-    },
-    lastName: {
-      get() {
-        return this.$store.state.profileLastName;
-      },
-      set(payload) {
-        this.$store.commit("changeLastName", payload);
-      },
-    },
-    username: {
-      get() {
-        return this.$store.state.profileUsername;
-      },
-      set(payload) {
-        this.$store.commit("changeUsername", payload);
-      },
-    },
-    email() {
-      return this.$store.state.profileEmail;
-    },
+    ...mapState('auth', ['info']),
   },
 };
 </script>

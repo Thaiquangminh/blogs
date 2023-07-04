@@ -12,15 +12,15 @@
           <router-link v-if="!isAuth" class="link" to="/login">Login / Register</router-link>
           <!-- ---------------------- Logged In ------------------- -->
           <div v-if="isAuth" :class="{ 'mobile-user-menu': mobile }" @click="toggleProfileMenu" class="profile"
-               ref="profile">
+          >
             <span>{{ profileImg }}</span>
             <div v-show="activeProfileMenu" class="profile-menu">
               <div class="info">
                 <p class="initials">{{ profileImg }}</p>
                 <div class="right">
-                  <p>Minh Thai</p>
-                  <p>Tequyem</p>
-                  <p>minh153@gmail.com</p>
+                  <p>{{ username }}</p>
+                  <p>{{ firstname }} {{ lastname }}</p>
+                  <p>{{ email }}</p>
                 </div>
               </div>
               <div class="options">
@@ -28,12 +28,6 @@
                   <router-link class="option" :to="{ name: 'Profile' }">
                     <userIcon class="icon"/>
                     <p class="option_item">Profile</p>
-                  </router-link>
-                </div>
-                <div v-if="admin" class="option">
-                  <router-link class="option" :to="{ name: 'Admin' }">
-                    <adminIcon class="icon"/>
-                    <p class="option_item">Admin</p>
                   </router-link>
                 </div>
                 <div class="option" @click="logout">
@@ -62,10 +56,8 @@
 <script>
 import menuIcon from "../assets/Icons/menu.svg";
 import userIcon from "../assets/Icons/user-alt-light.svg";
-import adminIcon from "../assets/Icons/user-crown-light.svg";
 import signOutIcon from "../assets/Icons/sign-out-alt-regular.svg";
-import {convertEmail} from "../../ultis/sharedFunc";
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 
 
 export default {
@@ -84,18 +76,28 @@ export default {
     };
   },
   mounted() {
-    this.convertEmail123()
-    console.log(this.profileImg)
   },
   components: {
     menuIcon,
     userIcon,
-    adminIcon,
     signOutIcon
   },
 
   computed: {
     ...mapGetters('auth', ['isAuth']),
+    ...mapState('auth', ['info']),
+    firstname() {
+      return this.info.firstname;
+    },
+    lastname() {
+      return this.info.lastname
+    },
+    username() {
+      return this.info.username
+    },
+    email() {
+      return this.info.email
+    }
 
   },
   methods: {
@@ -116,10 +118,7 @@ export default {
     toggleProfileMenu() {
       this.activeProfileMenu = !this.activeProfileMenu;
     },
-    convertEmail123() {
-      this.profileImg = convertEmail(this.$store.state["auth/email"], 2)
-      // this.profileImg = '123'
-    }
+
   },
 };
 </script>
@@ -217,6 +216,7 @@ header
   width: 250px
   background-color: #303030
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)
+  border-radius: 5px
 
   .info
     display: flex
@@ -238,14 +238,19 @@ header
     .right
       flex: 1
       margin-left: 24px
+      gap: 5px
+      display: flex
+      flex-direction: column
 
       p:nth-child(1)
         font-size: 14px
 
       p:nth-child(2)
+        font-size: 12px
 
       p:nth-child(3)
         font-size: 12px
+
 
   .options
     padding: 15px
