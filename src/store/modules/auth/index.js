@@ -6,7 +6,12 @@ export default {
     namespaced: true,
     state() {
         return {
-            email: '',
+            info: {
+                firstname: 'Default',
+                lastname: 'User',
+                username: 'Username',
+                email: '',
+            },
             userId: null,
             token: null,
             expire: null,

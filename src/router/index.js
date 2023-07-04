@@ -6,6 +6,7 @@ import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import ForgotPassword from "@/views/ForgotPassword.vue";
 import BlogDetail from "@/views/BlogDetail.vue";
+import Profile from "@/views/Profile.vue";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
         path: "/blog/:id",
         name: "Blog Detail",
         component: BlogDetail,
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: Profile,
     },
 ];
 

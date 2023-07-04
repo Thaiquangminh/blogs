@@ -32,7 +32,7 @@
             <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
             <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
             <router-link class="link" :to="{ name: 'CreatePost' }">Create Post</router-link>
-            <router-link class="link" :to="{ name: 'Login' }">Login In / Register</router-link>
+            <router-link class="link" :to="{ name: 'Login' }" v-if="!isAuth">Login In / Register</router-link>
           </ul>
         </div>
       </div>
@@ -48,6 +48,7 @@ import youTube from "../assets/Icons/youtube-brands.svg";
 import twitter from "../assets/Icons/twitter-brands.svg";
 import instagram from "../assets/Icons/instagram-brands.svg";
 import linkedin from "../assets/Icons/linkedin-brands.svg";
+import {mapGetters} from "vuex";
 
 export default {
   name: "footer-vue",
@@ -57,6 +58,9 @@ export default {
     instagram,
     linkedin,
   },
+  computed: {
+    ...mapGetters('auth', ['isAuth'])
+  }
 };
 </script>
 

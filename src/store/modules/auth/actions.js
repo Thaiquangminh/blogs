@@ -24,7 +24,6 @@ export default {
             })
         })
         const userInfo = await response.json()
-        console.log(userInfo)
         if (response.status !== 200) {
             const error = new Error('Wrong email or password. Try again.')
             throw error
@@ -43,5 +42,9 @@ export default {
     keepLogin(context) {
         const token = localStorage.getItem('token')
         context.commit('updateUserInfo', {token: token})
+    },
+
+    updateProfileInfo(context, userInfo) {
+        context.commit('updateProfileInfo', userInfo)
     }
 }
