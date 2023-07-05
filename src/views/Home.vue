@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <BlogPost :post="welcomeScreen"/>
-    <BlogPost :post="blog" v-for="(blog, index) in sampleBlogPost" :key="index"/>
+    <BlogPost :post="welcomeScreen" v-if="!isAuth"/>
+    <BlogPost :post="blog" v-for="(blog, index) in getBlogs" :key="index"/>
     <div class="blog-card-wrap">
       <div class="container">
         <h3>View More Recent Blogs</h3>
@@ -38,22 +38,12 @@ export default {
         welcomeScreen: true,
         photo: "coding"
       },
-      sampleBlogPost: [
-        {
-          title: "This is a filter",
-          blogHTML: 'This is a filter blog title!',
-          blogCoverPhoto: 'beautiful-stories',
-        },
-        {
-          title: "This is a filter",
-          blogHTML: 'This is a filter blog title!',
-          blogCoverPhoto: 'designed-for-everyone'
-        }
-      ],
     }
   },
   computed: {
-    ...mapGetters('card', ['getBlogCards'])
+    ...mapGetters('card', ['getBlogCards']),
+    ...mapGetters('auth', ["isAuth"]),
+    ...mapGetters('blog', ['getBlogs'])
   }
 
 };
