@@ -10,7 +10,7 @@
           Login/Register
           <Arrow class="arrow arrow-light"/>
         </router-link>
-        <router-link class="link" v-else to="/post">
+        <router-link class="link" v-else :to="`/blog/${post.id}`">
           View The Post
           <Arrow class="arrow"/>
         </router-link>
@@ -18,7 +18,7 @@
     </div>
     <div class="blog-photo">
       <img v-if="post.welcomeScreen" :src="require(`../assets/blogPhotos/${post.photo}.jpg`)" alt=""/>
-      <img v-else :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}.jpg`)" alt=""/>
+      <img v-else :src="`${post.blogCoverPhoto}`" alt=""/>
     </div>
   </div>
 </template>
