@@ -1,19 +1,35 @@
 <template>
-  <div class="modal">
-    <div class="modal-content">
-      <p>{{ this.modalMessage }}</p>
-      <button @click="closeModal">Close</button>
+  <div>
+    <div class="modal" v-if="type === 'modal'">
+      <div class="modal-content">
+        <p>{{ this.modalMessage }}</p>
+        <button @click="closeModal">Close</button>
+      </div>
+    </div>
+    <div class="modal" v-if="type === 'selectModal'">
+      <div class="modal-content">
+        <p>{{ this.modalMessage }}</p>
+        <div class="modal-group-btn">
+          <button @click="closeModal">No</button>
+          <button @click="acceptAction">Yes</button>
+        </div>
+
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
 export default {
-  props: ["modalMessage"],
+  props: ["modalMessage", 'type'],
   methods: {
     closeModal() {
       this.$emit('close-modal')
     },
+    acceptAction() {
+      this.$emit('accept-action')
+    }
   },
 };
 </script>
@@ -46,6 +62,11 @@ export default {
     button {
       align-self: center;
     }
+  }
+
+  .modal-group-btn {
+    display: flex;
+    justify-content: space-around;
   }
 }
 </style>

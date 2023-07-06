@@ -1,6 +1,6 @@
 <template>
   <div class="form-wrap">
-    <Modal v-if="activeModal" :modal-message="errorMsg" @close-modal="handleCloseModal"/>
+    <Modal v-if="activeModal" :modal-message="errorMsg" type="modal" @close-modal="handleCloseModal"/>
     <form class="register">
       <p class="login-register">
         Already have an account?

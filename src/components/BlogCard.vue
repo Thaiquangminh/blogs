@@ -4,7 +4,7 @@
       <div @click="editBlog" class="icon">
         <Edit class="edit"/>
       </div>
-      <div @click="deletePost" class="icon">
+      <div @click="() => deletePost(post.id)" class="icon">
         <Delete class="delete"/>
       </div>
     </div>
@@ -24,6 +24,7 @@
 import Arrow from "../assets/Icons/arrow-right-light.svg"
 import Edit from "../assets/Icons/edit-regular.svg"
 import Delete from "../assets/Icons/trash-regular.svg"
+import {mapActions} from "vuex";
 
 export default {
   name: "blogCard",
@@ -34,12 +35,14 @@ export default {
     Delete,
   },
   methods: {
-    deletePost() {
+    ...mapActions('card', ['deleteCard']),
+    deletePost(idCard) {
+      this.$emit('delete-card', idCard)
     },
     editBlog() {
     },
     handleNavigateBlog() {
-      this.$router.push(`/blog/${this.post.id}`)
+      // this.$router.push(`/blog/${this.post.id}`)
     }
   },
   computed: {
