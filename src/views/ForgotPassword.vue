@@ -1,6 +1,6 @@
 <template>
   <div class="reset-password">
-    <Modal v-if="modalActive" :modalMessage="modalMessage" @close-modal="closeModal"/>
+    <Modal v-if="modalActive" :modalMessage="modalMessage" type="modal" @close-modal="closeModal"/>
     <Loading v-if="loading"/>
     <div class="form-wrap">
       <form class="reset">
@@ -36,7 +36,7 @@ export default {
     return {
       email: "",
       modalActive: false,
-      modalMessage: "",
+      modalMessage: "Reset password successfully",
       loading: null,
     };
   },

@@ -1,37 +1,57 @@
 <template>
   <div class="blog-card-wrap">
+    <Modal :modal-message="modalMessage" type="selectModal" v-if="modalActive" @close-modal="closeModal"
+           @accept-action="() => handleDeleteCard(this.currentIdCard)"></Modal>
     <div class="blog-cards container">
       <div class="toggle-edit">
         <span>Toggle Editing Post</span>
         <input type="checkbox" hidden="hidden" v-model="editPost">
         <label class="switch" :for="editPost" @click="handleToggleEdit"/>
       </div>
-      <BlogCard :open-edit-post="editPost" :post="post" v-for="(post, index) in getBlogCards" :key="index"/>
+      <BlogCard :open-edit-post="editPost" :post="post" v-for="(post, index) in getBlogCards" :key="index"
+                @delete-card="handleOpenDeleteModal"/>
     </div>
   </div>
 </template>
 
 <script>
 import BlogCard from "../components/BlogCard";
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
+import Modal from "@/components/Modal.vue";
 
 export default {
   name: "blogs",
   data() {
     return {
-      editPost: false
+      modalMessage: 'Are you sure you want to delete ?',
+      modalActive: null,
+      editPost: false,
+      currentIdCard: null,
     }
   },
 
-  components: {BlogCard},
+  components: {Modal, BlogCard},
   computed: {
     ...mapGetters('card', ['getBlogCards']),
   },
 
   methods: {
+    ...mapActions('card', ['deleteCard']),
     handleToggleEdit() {
       this.editPost = !this.editPost
+    },
+    closeModal() {
+      this.modalActive = false
+    },
+    handleOpenDeleteModal(idCard) {
+      this.modalActive = true
+      this.currentIdCard = idCard
+    },
+    handleDeleteCard(idCard) {
+      this.deleteCard(idCard)
+      this.closeModal()
     }
+
   }
 
 };
