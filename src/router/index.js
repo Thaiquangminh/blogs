@@ -7,6 +7,7 @@ import Register from "@/views/Register.vue";
 import ForgotPassword from "@/views/ForgotPassword.vue";
 import Profile from "@/views/Profile.vue";
 import BlogDetail from "@/views/BlogDetail.vue";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -20,11 +21,18 @@ const routes = [
         path: "/blogs",
         name: "Blog",
         component: Blogs,
+        meta: {
+            needLogin: true
+        }
     },
     {
         path: "/login",
         name: "Login",
         component: Login,
+        meta: {
+            loggedIn: true
+        }
+
     },
     {
         path: "/register",
@@ -39,12 +47,18 @@ const routes = [
     {
         path: "/blog/:id",
         name: "Blog Detail",
-        component: BlogDetail
+        component: BlogDetail,
+        meta: {
+            needLogin: true
+        }
     },
     {
         path: "/profile",
         name: "Profile",
         component: Profile,
+        meta: {
+            needLogin: true
+        }
     },
 ];
 
@@ -53,5 +67,15 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes,
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.needLogin && !store.getters["auth/isAuth"]) {
+        next('/login')
+    } else if (to.meta.loggedIn && store.getters["auth/isAuth"]) {
+        next('/')
+    } else {
+        next()
+    }
+})
 
 export default router;

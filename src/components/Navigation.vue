@@ -105,7 +105,7 @@ export default {
     checkScreen() {
       this.windowWidth = window.innerWidth;
       if (this.windowWidth <= 700) {
-        this.mobileNav = true
+        this.mobileNav = false
         this.mobile = true;
       } else {
         this.mobile = false;
@@ -170,16 +170,16 @@ header
         text-decoration: none
 
 .mobile-nav
-  padding: 20px
-  width: 70%
-  max-width: 250px
   display: flex
   flex-direction: column
-  position: fixed
-  height: 100%
   background-color: #303030
+  position: fixed
   top: 0
   left: 0
+  height: 100%
+  max-width: 250px
+  width: 70%
+  padding: 20px
 
   .link
     padding: 15px 0

@@ -41,7 +41,7 @@ export default {
 
     keepLogin(context) {
         const token = localStorage.getItem('token')
-        context.commit('updateUserInfo', {token: token})
+        context.commit('keepLogin', {token: token})
     },
 
     updateProfileInfo(context, userInfo) {
