@@ -15,6 +15,7 @@
 <script>
 import Navigation from '@/components/Navigation.vue';
 import FooterVue from '@/components/Footer.vue';
+import {mapActions} from "vuex";
 
 export default {
   name: 'app',
@@ -25,11 +26,13 @@ export default {
     };
   },
   created() {
+    this.keepLogin()
     this.checkRoute();
   },
   mounted() {
   },
   methods: {
+    ...mapActions('auth', ['keepLogin']),
     checkRoute() {
       if (this.$route.path === '/login' || this.$route.path === '/register' || this.$route.path === '/forgotPassword') {
         this.showNavigation = false;

@@ -10,10 +10,10 @@
         </div>
       </div>
     </div>
-    <div class="updates">
+    <div class="updates" v-if="!isAuth">
       <div class="container">
         <h2>never miss a post. Register for your free account today!</h2>
-        <router-link class="router-button" to="/"> Register for FireBlogs
+        <router-link class="router-button" to="/register"> Register for FireBlogs
           <Arrow class="arrow arrow-light"/>
         </router-link>
       </div>

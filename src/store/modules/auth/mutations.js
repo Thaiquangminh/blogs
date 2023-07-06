@@ -6,6 +6,9 @@ export default {
         state.expire = payload.expiresIn
 
     },
+    keepLogin(state, payload) {
+        state.token = payload.token
+    },
 
     updateProfileInfo(state, payload) {
         state.info.email = payload.email
