@@ -150,11 +150,4 @@ export default {
     }
   }
 }
-
-.no-user:first-child {
-  .blog-content {
-    background-color: #303030;
-    color: #fff;
-  }
-}
 </style>

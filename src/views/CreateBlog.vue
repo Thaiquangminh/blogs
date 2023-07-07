@@ -23,8 +23,8 @@
         <vue-editor :editorOptions="editorSettings" v-model="blogData.blogHTML" useCustomImageHandler/>
       </div>
       <div class="blog-actions">
-        <button @click="uploadBlog">Publish Blog</button>
-        <button class="router-button" @click="handleNavigateBlogPreview">
+        <button @click="uploadBlog" :class="{'button-inactive': !this.activePublish}">Publish Blog</button>
+        <button :class="['router-button', {'button-inactive': !this.activePublish}]" @click="handleNavigateBlogPreview">
           Post Preview
         </button>
       </div>
@@ -97,7 +97,11 @@ export default {
       this.$router.push('/')
     },
   },
-  computed: {},
+  computed: {
+    activePublish() {
+      return this.blogData.blogTitle && this.blogData.fileUrl && this.blogData.blogHTML
+    }
+  },
 };
 </script>
 

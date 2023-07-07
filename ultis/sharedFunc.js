@@ -1,5 +1,5 @@
-export const convertEmail = (email = '', number) => {
-    return email.substring(0, number)
+export const shortenText = (text = '', number) => {
+    return text.substring(0, number)
 }
 
 

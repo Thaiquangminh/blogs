@@ -13,10 +13,10 @@
           <!-- ---------------------- Logged In ------------------- -->
           <div v-if="isAuth" :class="{ 'mobile-user-menu': mobile }" @click="toggleProfileMenu" class="profile"
           >
-            <span>{{ profileImg }}</span>
+            <span>{{ textProfile }}</span>
             <div v-show="activeProfileMenu" class="profile-menu">
               <div class="info">
-                <p class="initials">{{ profileImg }}</p>
+                <p class="initials">{{ textProfile }}</p>
                 <div class="right">
                   <p>{{ username }}</p>
                   <p>{{ firstname }} {{ lastname }}</p>
@@ -58,6 +58,7 @@ import menuIcon from "../assets/Icons/menu.svg";
 import userIcon from "../assets/Icons/user-alt-light.svg";
 import signOutIcon from "../assets/Icons/sign-out-alt-regular.svg";
 import {mapActions, mapGetters, mapState} from "vuex";
+import {shortenText} from "../../ultis/sharedFunc";
 
 
 export default {
@@ -65,6 +66,8 @@ export default {
   created() {
     window.addEventListener('resize', this.checkScreen);
     this.checkScreen();
+    this.textProfile = shortenText(this.info.email, 3)
+    console.log(this.textProfile)
   },
   data() {
     return {
@@ -72,7 +75,7 @@ export default {
       mobile: null,
       mobileNav: null,
       activeProfileMenu: null,
-      profileImg: ''
+      textProfile: ''
     };
   },
   mounted() {
