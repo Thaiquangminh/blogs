@@ -8,6 +8,8 @@ import ForgotPassword from "@/views/ForgotPassword.vue";
 import Profile from "@/views/Profile.vue";
 import BlogDetail from "@/views/BlogDetail.vue";
 import store from "@/store";
+import CreateBlog from "@/views/CreateBlog.vue";
+import BlogPreview from "@/views/BlogPreview.vue";
 
 Vue.use(VueRouter);
 
@@ -41,12 +43,12 @@ const routes = [
     },
     {
         path: "/forgotPassword",
-        name: "Forgot Password",
+        name: "ForgotPassword",
         component: ForgotPassword,
     },
     {
         path: "/blog/:id",
-        name: "Blog Detail",
+        name: "BlogDetail",
         component: BlogDetail,
         meta: {
             needLogin: true
@@ -59,6 +61,23 @@ const routes = [
         meta: {
             needLogin: true
         }
+    },
+    {
+        path: "/create-blog",
+        name: "CreateBlog",
+        component: CreateBlog,
+        meta: {
+            needLogin: true
+        },
+    },
+    {
+        path: "/preview-blog",
+        name: "BlogPreview",
+        component: BlogPreview,
+        props: true,
+        meta: {
+            needLogin: true
+        },
     },
 ];
 
