@@ -8,7 +8,7 @@
         <ul v-if="!mobile" style="display: flex; align-items: center">
           <router-link class="link" to="/">Home</router-link>
           <router-link class="link" to="/blogs">Blogs</router-link>
-          <router-link class="link" to="#">Create Post</router-link>
+          <router-link class="link" to="/create-blog">Create Post</router-link>
           <router-link v-if="!isAuth" class="link" to="/login">Login / Register</router-link>
           <!-- ---------------------- Logged In ------------------- -->
           <div v-if="isAuth" :class="{ 'mobile-user-menu': mobile }" @click="toggleProfileMenu" class="profile"
@@ -46,7 +46,7 @@
       <ul class="mobile-nav" v-if="mobileNav">
         <router-link class="link" to="/">Home</router-link>
         <router-link class="link" to="/blogs">Blogs</router-link>
-        <router-link class="link" to="#">Create Post</router-link>
+        <router-link class="link" to="/create-blog">Create Post</router-link>
         <router-link class="link" to="/login">Login / Register</router-link>
       </ul>
     </transition>
